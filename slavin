@@ -1,2 +1,4 @@
 #!/bin/bash
-source src/fn.sh
+# shellcheck source=src/fn.sh
+source ./src/fn.sh
+fetch

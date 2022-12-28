@@ -11,8 +11,15 @@ fetch() {
     if [ "$0" = "$1" = "$2" ]; 
     then
         wget $2/db.asc
-        gpg --verify 
-        echo "$1: $2" >> /etc/slavin.repos
+        gpg --verify db db.asc
+        if [ gpg --verify db db.asc != true ]; then
+            echo "Something's little weird about this repo. But still, do you want to add it? [Y/n]"
+            read answer
+        if [ $answer = y ]; then
+            echo "Adding $1 to the system"
+            echo "$1: $2" >> /etc/slavin.repos
+        else
+            exit 1
     else
       clue
     fi
